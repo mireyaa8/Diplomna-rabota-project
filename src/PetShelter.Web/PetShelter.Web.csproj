@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- User Secrets: връзката с базата, паролата на администратора и AI ключът
+         се пазят извън проекта и никога не се качват в GitHub. -->
+    <UserSecretsId>petshelter-web-7c1f3a52-diploma</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetShelter.Data\PetShelter.Data.csproj" />
+    <ProjectReference Include="..\PetShelter.Services\PetShelter.Services.csproj" />
+  </ItemGroup>
+
+</Project>

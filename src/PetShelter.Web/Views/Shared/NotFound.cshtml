@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Страницата не е намерена";
+}
+
+<div class="error-page text-center py-5">
+    <div class="error-code">404</div>
+    <i class="bi bi-search error-icon wobble" aria-hidden="true"></i>
+    <h1 class="h3 fw-bold mt-3">Тази страница е избягала</h1>
+    <p class="text-muted mb-4">
+        Търсихме навсякъде, но не я открихме. Може адресът да е грешен
+        или страницата да е била премахната.
+    </p>
+    <a class="btn btn-accent" asp-area="" asp-controller="Home" asp-action="Index">Към началото</a>
+</div>

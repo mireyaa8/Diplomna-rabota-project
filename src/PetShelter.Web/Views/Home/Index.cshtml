@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Начало";
+}
+
+<section class="hero rounded-4 p-4 p-md-5 mb-5">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7 reveal">
+            <h1 class="display-5 fw-bold mb-3">Всяко животно заслужава дом</h1>
+            <p class="lead mb-4">
+                Разгледай животните от приютите, осинови приятел или подай сигнал,
+                когато видиш бездомно животно. Ние ще уведомим най-близкия приют.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-accent btn-lg" href="#how-it-works">Как работи</a>
+                <a class="btn btn-outline-dark btn-lg" asp-area="Identity" asp-page="/Account/Register">Създай профил</a>
+            </div>
+        </div>
+        <div class="col-lg-5 text-center reveal reveal-delay">
+            <i class="bi bi-heart-pulse hero-icon" aria-hidden="true"></i>
+        </div>
+    </div>
+</section>
+
+<section id="how-it-works" class="mb-5">
+    <h2 class="h3 fw-bold mb-4 reveal">Как работи платформата</h2>
+    <div class="row g-4">
+        <div class="col-md-4 reveal">
+            <div class="feature-card h-100 p-4 rounded-4">
+                <i class="bi bi-search-heart feature-icon" aria-hidden="true"></i>
+                <h3 class="h5 fw-bold mt-3">Каталог за осиновяване</h3>
+                <p class="mb-0">Филтрирай по вид, порода, възраст и характер и виж подробен профил със снимки и навици.</p>
+            </div>
+        </div>
+        <div class="col-md-4 reveal reveal-delay">
+            <div class="feature-card h-100 p-4 rounded-4">
+                <i class="bi bi-geo-alt feature-icon" aria-hidden="true"></i>
+                <h3 class="h5 fw-bold mt-3">Сигнал за бездомно животно</h3>
+                <p class="mb-0">Качи снимка и отбележи мястото на картата. Най-близкият приют получава известие.</p>
+            </div>
+        </div>
+        <div class="col-md-4 reveal reveal-delay-2">
+            <div class="feature-card h-100 p-4 rounded-4">
+                <i class="bi bi-stars feature-icon" aria-hidden="true"></i>
+                <h3 class="h5 fw-bold mt-3">AI описание</h3>
+                <p class="mb-0">Изкуственият интелект разпознава вида, породата и цвета и предупреждава за повторни сигнали.</p>
+            </div>
+        </div>
+    </div>
+</section>

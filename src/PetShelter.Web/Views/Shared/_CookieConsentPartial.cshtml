@@ -1,0 +1,22 @@
+@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <div id="cookieConsent" class="cookie-banner shadow" role="alert">
+        <div class="container d-flex flex-column flex-md-row align-items-md-center gap-3 py-3">
+            <span class="flex-grow-1">
+                Използваме бисквитки, за да запомним вашия вход и избраните филтри.
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">Научете повече</a>.
+            </span>
+            <button type="button" class="btn btn-accent" data-cookie-string="@cookieString">
+                Приемам
+            </button>
+        </div>
+    </div>
+}

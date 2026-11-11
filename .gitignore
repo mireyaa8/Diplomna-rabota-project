@@ -1,0 +1,48 @@
+# Компилирани файлове
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.rsuser
+
+# Тестове и покритие
+[Tt]est[Rr]esult*/
+coverage*/
+*.coverage
+*.coveragexml
+coverage.cobertura.xml
+
+# NuGet
+*.nupkg
+packages/
+!**/packages/build/
+
+# Локални настройки и тайни — НИКОГА не се качват в GitHub
+appsettings.Local.json
+appsettings.*.Local.json
+*.env
+.env*
+secrets.json
+
+# Качени от потребителите снимки (създават се при работа)
+src/PetShelter.Web/wwwroot/uploads/*
+!src/PetShelter.Web/wwwroot/uploads/.gitkeep
+
+# Бази данни
+*.mdf
+*.ldf
+*.db
+
+# Операционна система
+.DS_Store
+Thumbs.db

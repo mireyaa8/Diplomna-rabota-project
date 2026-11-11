@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PetShelter.Data/PetShelter.Data.csproj" />
+    <Project Path="src/PetShelter.Services/PetShelter.Services.csproj" />
+    <Project Path="src/PetShelter.Web/PetShelter.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PetShelter.Tests/PetShelter.Tests.csproj" />
+  </Folder>
+</Solution>

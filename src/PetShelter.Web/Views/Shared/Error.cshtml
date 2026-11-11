@@ -1,0 +1,19 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Грешка";
+}
+
+<div class="error-page text-center py-5">
+    <div class="error-code">500</div>
+    <i class="bi bi-bandaid error-icon" aria-hidden="true"></i>
+    <h1 class="h3 fw-bold mt-3">Нещо се обърка</h1>
+    <p class="text-muted mb-4">
+        Възникна неочаквана грешка. Опитайте отново след малко.
+        Ако проблемът продължава, свържете се с администратора.
+    </p>
+    @if (Model?.ShowRequestId == true)
+    {
+        <p class="small text-muted">Код на заявката: <code>@Model.RequestId</code></p>
+    }
+    <a class="btn btn-accent" asp-area="" asp-controller="Home" asp-action="Index">Към началото</a>
+</div>
