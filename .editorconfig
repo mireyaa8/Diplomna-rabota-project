@@ -1,0 +1,54 @@
+# Общи правила за форматиране на кода. Visual Studio, Rider и VS Code ги четат автоматично,
+# така че кодът изглежда еднакво, без значение кой и къде го пише.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{json,yml,yaml,csproj,props,slnx,xml}]
+indent_size = 2
+
+[*.md]
+# Два интервала в края на реда в Markdown означават нов ред — не ги махаме.
+trim_trailing_whitespace = false
+
+[*.cs]
+# Подредба на using директивите: първо System.*
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# Пространство от имена на ниво файл (namespace X;) — както в целия проект.
+csharp_style_namespace_declarations = file_scoped:suggestion
+
+# var само когато типът е ясен от дясната страна.
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+
+# Къдравите скоби винаги на нов ред и винаги задължителни.
+csharp_new_line_before_open_brace = all
+csharp_prefer_braces = true:suggestion
+
+# Именуване: интерфейсите започват с I.
+dotnet_naming_rule.interfaces_start_with_i.symbols = interfaces
+dotnet_naming_rule.interfaces_start_with_i.style = prefix_i
+dotnet_naming_rule.interfaces_start_with_i.severity = suggestion
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_style.prefix_i.required_prefix = I
+dotnet_naming_style.prefix_i.capitalization = pascal_case
+
+# Именуване: константите са с PascalCase.
+dotnet_naming_rule.constants_pascal_case.symbols = constants
+dotnet_naming_rule.constants_pascal_case.style = pascal_case
+dotnet_naming_rule.constants_pascal_case.severity = suggestion
+dotnet_naming_symbols.constants.applicable_kinds = field, local
+dotnet_naming_symbols.constants.required_modifiers = const
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+[*.cshtml]
+indent_size = 4
