@@ -114,7 +114,12 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-await app.InitializeDatabaseAsync();
+// При интеграционните тестове (среда „Testing“) базата се създава от самите тестове,
+// в паметта, затова миграциите на SQL Server не се изпълняват.
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    await app.InitializeDatabaseAsync();
+}
 
 app.Run();
 
