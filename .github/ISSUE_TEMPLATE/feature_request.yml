@@ -1,0 +1,31 @@
+name: Нова функционалност
+description: Предложение за нова възможност или подобрение
+title: "[Идея] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Какъв проблем решава?
+      description: За кого е полезно и защо.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Как трябва да работи?
+    validations:
+      required: true
+  - type: dropdown
+    id: module
+    attributes:
+      label: Модул
+      options:
+        - Каталог за осиновяване
+        - Заявки за осиновяване
+        - Сигнали за бездомни животни
+        - AI анализ на снимки
+        - Админ зона
+        - Друго
+    validations:
+      required: true

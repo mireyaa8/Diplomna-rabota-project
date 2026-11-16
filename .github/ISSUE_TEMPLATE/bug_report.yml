@@ -1,0 +1,44 @@
+name: Грешка
+description: Нещо в приложението не работи както трябва
+title: "[Грешка] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Какво се случи?
+      description: Опишете грешката с няколко изречения.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Стъпки за повторение
+      placeholder: |
+        1. Отворете ...
+        2. Натиснете ...
+        3. Вижте грешката
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Какво очаквахте да се случи?
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: С каква роля бяхте влезли?
+      options:
+        - Гост (без вход)
+        - User
+        - ShelterStaff
+        - Administrator
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Екранни снимки
+      description: По избор. Не качвайте снимки с лични данни или пароли.
