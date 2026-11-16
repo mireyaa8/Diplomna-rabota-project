@@ -3,12 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using PetShelter.Data;
 using PetShelter.Data.Common;
 using PetShelter.Data.Entities;
+using PetShelter.Data.Seeding;
 
 namespace PetShelter.Web.Infrastructure;
 
 /// <summary>
-/// При стартиране: прилага миграциите, създава ролите и (ако е настроен)
-/// първия администратор. Данните за администратора идват от User Secrets.
+/// При стартиране: прилага миграциите, създава ролите, (ако е настроен)
+/// първия администратор и (в Development) демо животните.
+/// Данните за администратора идват от User Secrets.
 /// </summary>
 public static class DatabaseInitializer
 {
@@ -31,6 +33,16 @@ public static class DatabaseInitializer
 
         await SeedRolesAsync(services.GetRequiredService<RoleManager<IdentityRole>>());
         await SeedAdministratorAsync(services, logger);
+
+        // Демо животни — само ако SeedDemoData е включено (по подразбиране само в Development).
+        if (app.Configuration.GetValue<bool>("SeedDemoData"))
+        {
+            int added = await DemoDataSeeder.SeedAsync(dbContext, DateTime.UtcNow);
+            if (added > 0)
+            {
+                logger.LogInformation("Добавени са {Count} демо животни.", added);
+            }
+        }
     }
 
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
