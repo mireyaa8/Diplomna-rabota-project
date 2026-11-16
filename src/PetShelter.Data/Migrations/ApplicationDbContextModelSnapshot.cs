@@ -487,6 +487,102 @@ namespace PetShelter.Data.Migrations
                             Id = 11,
                             Name = "Персийска",
                             SpeciesId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Български овчарски пес",
+                            SpeciesId = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Йоркширски териер",
+                            SpeciesId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Чихуахуа",
+                            SpeciesId = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Бордър коли",
+                            SpeciesId = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Американски стафордширски териер",
+                            SpeciesId = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Френски булдог",
+                            SpeciesId = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Сиамска",
+                            SpeciesId = 2
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Мейн кун",
+                            SpeciesId = 2
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Шотландска клепоуха",
+                            SpeciesId = 2
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Руска синя",
+                            SpeciesId = 2
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Смесена порода",
+                            SpeciesId = 3
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Холандско джудже",
+                            SpeciesId = 3
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "Клепоух заек",
+                            SpeciesId = 3
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "Вълнисто папагалче",
+                            SpeciesId = 4
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "Корела",
+                            SpeciesId = 4
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = "Канарче",
+                            SpeciesId = 4
                         });
                 });
 
@@ -570,52 +666,92 @@ namespace PetShelter.Data.Migrations
                         new
                         {
                             Id = 1,
+                            Description = "Спокоен и търпелив в присъствието на деца.",
                             Name = "Разбира се с деца"
                         },
                         new
                         {
                             Id = 2,
+                            Description = "Може да живее с друго куче в дома.",
                             Name = "Разбира се с други кучета"
                         },
                         new
                         {
                             Id = 3,
+                            Description = "Не гони и не напада котки.",
                             Name = "Разбира се с котки"
                         },
                         new
                         {
                             Id = 4,
+                            Description = "Предпочита тишината и почивката.",
                             Name = "Спокоен"
                         },
                         new
                         {
                             Id = 5,
+                            Description = "Обича игри и играчки.",
                             Name = "Игрив"
                         },
                         new
                         {
                             Id = 6,
+                            Description = "Нуждае се от много движение всеки ден.",
                             Name = "Енергичен"
                         },
                         new
                         {
                             Id = 7,
+                            Description = "Радва се на дълги разходки навън.",
                             Name = "Обича разходки"
                         },
                         new
                         {
                             Id = 8,
+                            Description = "Върви спокойно на каишка.",
                             Name = "Приучен на каишка"
                         },
                         new
                         {
                             Id = 9,
+                            Description = "Чувства се добре и в по-малко пространство.",
                             Name = "Подходящ за апартамент"
                         },
                         new
                         {
                             Id = 10,
+                            Description = "Има нужда от последователно възпитание.",
                             Name = "Нуждае се от опитен стопанин"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "Ходи до тоалетна навън или в котешка тоалетна.",
+                            Name = "Приучен на тоалетна"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "Търси ласка и близост с хората.",
+                            Name = "Гальовен"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "Нужно му е време да свикне с нови хора.",
+                            Name = "Плах"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Description = "Спокойно изчаква, докато стопаните са на работа.",
+                            Name = "Може да остава сам"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Description = "Има здравословен проблем, който изисква внимание.",
+                            Name = "Нуждае се от специални грижи"
                         });
                 });
 
@@ -715,6 +851,16 @@ namespace PetShelter.Data.Migrations
                         {
                             Id = 2,
                             Name = "Котка"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Заек"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Птица"
                         });
                 });
 
