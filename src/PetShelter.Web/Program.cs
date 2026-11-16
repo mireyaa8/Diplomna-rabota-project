@@ -84,6 +84,9 @@ else
     app.UseHsts();
 }
 
+// HTTP заглавки за сигурност (CSP, X-Frame-Options и др.) към всеки отговор.
+app.UseSecurityHeaders();
+
 // 404, 403 и др. → собствени страници.
 app.UseStatusCodePagesWithReExecute("/Home/StatusCode/{0}");
 
