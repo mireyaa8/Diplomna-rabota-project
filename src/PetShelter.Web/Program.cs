@@ -59,6 +59,9 @@ builder.Services.AddControllersWithViews(options =>
 });
 builder.Services.AddRazorPages();
 
+// Ограничение на опитите за вход и регистрация от един IP адрес (защита от brute force).
+builder.Services.AddAccountRateLimiting(builder.Configuration);
+
 // ---------- Услуги (бизнес логика) ----------
 builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
 
@@ -95,6 +98,7 @@ app.UseStaticFiles();
 app.UseCookiePolicy();
 
 app.UseRouting();
+app.UseRateLimiter();
 
 app.UseAuthentication();
 app.UseAuthorization();

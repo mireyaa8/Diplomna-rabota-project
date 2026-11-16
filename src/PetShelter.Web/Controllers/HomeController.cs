@@ -33,6 +33,7 @@ public class HomeController : Controller
         {
             404 => View("NotFound"),
             403 => View("Forbidden"),
+            429 => View("TooManyRequests"),
             _ => View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }),
         };
     }

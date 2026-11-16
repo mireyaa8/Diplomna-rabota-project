@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Твърде много опити";
+}
+
+<div class="error-page text-center py-5">
+    <div class="error-code">429</div>
+    <i class="bi bi-hourglass-split error-icon wobble" aria-hidden="true"></i>
+    <h1 class="h3 fw-bold mt-3">Твърде много опити</h1>
+    <p class="text-muted mb-4">
+        За да пазим профилите от отгатване на пароли, ограничаваме броя на опитите.
+        Изчакайте около минута и опитайте отново.
+    </p>
+    <a class="btn btn-accent" asp-area="" asp-controller="Home" asp-action="Index">Към началото</a>
+</div>
