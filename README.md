@@ -23,6 +23,10 @@ AI услуга описва вида, породата и цвета на жи�
 | Admin зона със статистика | ✅ Етап 1 (основа) |
 | Банер за съгласие с бисквитки | ✅ Етап 1 |
 | Алгоритъм за откриване на повторни сигнали | ✅ Етап 1 (логика + тестове) |
+| Начални данни: 4 вида, 27 породи, 15 черти на характера; демо животни при разработка | ✅ Етап 1 |
+| HTTP заглавки за сигурност (CSP, X-Frame-Options, nosniff) | ✅ Етап 1 |
+| Ограничение на опитите за вход и регистрация (страница 429) | ✅ Етап 1 |
+| Unit и интеграционни тестове (WebApplicationFactory) | ✅ Етап 1 |
 | Каталог с филтри и профили на животни | ⏳ Етап 2 |
 | Заявки за осиновяване | ⏳ Етап 3 |
 | Сигнали с карта (Leaflet + OpenStreetMap) | ⏳ Етап 3 |
@@ -36,6 +40,7 @@ AI услуга описва вида, породата и цвета на жи�
 - **ASP.NET Core Identity** — потребители и роли
 - **Bootstrap 5**, CSS анимации, JavaScript
 - **xUnit**, **Moq**, **EF Core InMemory**, **Coverlet** — тестове и покритие
+- **Microsoft.AspNetCore.Mvc.Testing** — интеграционни тестове на цялото приложение
 - **GitHub Actions** — непрекъсната интеграция (CI)
 
 ## Структура на решението
@@ -47,8 +52,10 @@ PetShelter.slnx
 │   ├── PetShelter.Services/   Бизнес логика, помощни класове, AI анализатор
 │   └── PetShelter.Web/        Контролери, изгледи, Admin зона, Program.cs
 ├── tests/
-│   └── PetShelter.Tests/      Unit тестове
-└── .github/workflows/ci.yml   CI: build + тестове при всеки push
+│   └── PetShelter.Tests/      Unit тестове; Integration/ — тестове на цялото приложение
+├── .github/workflows/ci.yml   CI: build + тестове при всеки push
+├── .github/ISSUE_TEMPLATE/    Шаблони за доклад на грешка и предложение
+└── .editorconfig              Общи правила за форматиране на кода
 ```
 
 ## Структура на базата данни
@@ -101,10 +108,10 @@ PetShelter.slnx
    dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<вашата връзка>"
    ```
 
-3. Създайте първата миграция и базата (от главната папка на решението):
+3. Създайте базата (от главната папка на решението). Миграциите вече са в хранилището,
+   а приложението ги прилага и само при стартиране:
 
    ```bash
-   dotnet ef migrations add InitialCreate --project src/PetShelter.Data --startup-project src/PetShelter.Web
    dotnet ef database update --project src/PetShelter.Data --startup-project src/PetShelter.Web
    ```
 
@@ -114,13 +121,24 @@ PetShelter.slnx
    dotnet run --project src/PetShelter.Web
    ```
 
-   При стартиране се създават ролите и администраторът от стъпка 2.
+   При стартиране се създават ролите и администраторът от стъпка 2. В среда Development
+   (`SeedDemoData: true` в `appsettings.Development.json`) се добавят и 8 демо животни,
+   ако базата още няма животни. В Production демо данни не се добавят.
 
-5. Тестове:
+5. Тестове (unit и интеграционни; не изискват SQL Server):
 
    ```bash
    dotnet test
    ```
+
+## Сигурност
+
+- **CSRF** — всяка POST заявка се проверява с antiforgery токен.
+- **XSS** — Razor кодира всички изходни данни; Content Security Policy забранява вградени скриптове.
+- **Clickjacking** — `X-Frame-Options: DENY` и `frame-ancestors 'none'`.
+- **Отгатване на пароли** — заключване на профила след 5 грешни опита и до 10 опита за вход
+  или регистрация на минута от един IP адрес (настройва се в `RateLimiting` в `appsettings.json`).
+- **Тайни** — паролите и ключовете са в User Secrets, не в хранилището.
 
 ## Тестови потребители
 
