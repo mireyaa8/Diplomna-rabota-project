@@ -5,6 +5,7 @@ using PetShelter.Data;
 using PetShelter.Data.Entities;
 using PetShelter.Services.Admin;
 using PetShelter.Services.Ai;
+using PetShelter.Services.Animals;
 using PetShelter.Services.Reports;
 using PetShelter.Web.Infrastructure;
 
@@ -63,7 +64,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddAccountRateLimiting(builder.Configuration);
 
 // ---------- Услуги (бизнес логика) ----------
+builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+builder.Services.AddScoped<IAnimalService, AnimalService>();
 
 // Strategy: тестов анализатор, докато не бъде добавена истинската AI услуга.
 builder.Services.AddScoped<IAnimalImageAnalyzer, FakeAnimalImageAnalyzer>();
