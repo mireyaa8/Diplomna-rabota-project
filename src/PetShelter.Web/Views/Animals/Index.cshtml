@@ -1,0 +1,175 @@
+@model AnimalCatalogViewModel
+@using Microsoft.AspNetCore.WebUtilities
+@using Microsoft.Extensions.Primitives
+@{
+    ViewData["Title"] = "Животни за осиновяване";
+    var query = Model.Query;
+    var result = Model.Result;
+
+    // Адрес към друга страница от резултатите, като се запазват всички избрани филтри.
+    string PageUrl(int page)
+    {
+        var parameters = Context.Request.Query
+            .Where(p => !string.Equals(p.Key, "Page", StringComparison.OrdinalIgnoreCase))
+            .ToList();
+        parameters.Add(new KeyValuePair<string, StringValues>("Page", page.ToString()));
+        return QueryHelpers.AddQueryString(Url.Action("Index", "Animals")!, parameters);
+    }
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-1">Животни за осиновяване</h1>
+        <p class="text-muted mb-0">Намерени: @result.TotalCount</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <aside class="col-lg-3">
+        <form method="get" asp-action="Index" class="filter-panel p-3 rounded-4" id="catalogFilters">
+            <div class="mb-3">
+                <label class="form-label" for="SearchTerm">Търсене</label>
+                <input class="form-control" id="SearchTerm" name="SearchTerm" value="@query.SearchTerm" placeholder="Име или описание" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="SpeciesId">Вид</label>
+                <select class="form-select" id="SpeciesId" name="SpeciesId">
+                    <option value="">Всички</option>
+                    @foreach (var species in Model.Options.Species)
+                    {
+                        <option value="@species.Id" selected="@(query.SpeciesId == species.Id)">@species.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="BreedId">Порода</label>
+                <select class="form-select" id="BreedId" name="BreedId">
+                    <option value="">Всички</option>
+                    @foreach (var breed in Model.Options.Breeds)
+                    {
+                        <option value="@breed.Id" data-species="@breed.ParentId" selected="@(query.BreedId == breed.Id)">@breed.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <label class="form-label" for="Gender">Пол</label>
+                    <select class="form-select" id="Gender" name="Gender">
+                        <option value="">Всички</option>
+                        @foreach (var gender in new[] { Gender.Male, Gender.Female })
+                        {
+                            <option value="@gender" selected="@(query.Gender == gender)">@gender.ToDisplay()</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="Size">Размер</label>
+                    <select class="form-select" id="Size" name="Size">
+                        <option value="">Всички</option>
+                        @foreach (var size in Enum.GetValues<AnimalSize>())
+                        {
+                            <option value="@size" selected="@(query.Size == size)">@size.ToDisplay()</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="Age">Възраст</label>
+                <select class="form-select" id="Age" name="Age">
+                    <option value="">Всички</option>
+                    @foreach (var age in Enum.GetValues<AgeGroup>())
+                    {
+                        <option value="@age" selected="@(query.Age == age)">@age.ToDisplay()</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="ShelterId">Приют</label>
+                <select class="form-select" id="ShelterId" name="ShelterId">
+                    <option value="">Всички</option>
+                    @foreach (var shelter in Model.Options.Shelters)
+                    {
+                        <option value="@shelter.Id" selected="@(query.ShelterId == shelter.Id)">@shelter.Name</option>
+                    }
+                </select>
+            </div>
+
+            <fieldset class="mb-3">
+                <legend class="form-label fs-6">Характер</legend>
+                @foreach (var trait in Model.Options.Traits)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="TraitIds" value="@trait.Id"
+                               id="trait-@trait.Id" checked="@query.TraitIds.Contains(trait.Id)" />
+                        <label class="form-check-label" for="trait-@trait.Id">@trait.Name</label>
+                    </div>
+                }
+            </fieldset>
+
+            <div class="mb-3">
+                <label class="form-label" for="Sorting">Подреждане</label>
+                <select class="form-select" id="Sorting" name="Sorting">
+                    @foreach (var sorting in Enum.GetValues<AnimalSorting>())
+                    {
+                        <option value="@sorting" selected="@(query.Sorting == sorting)">@sorting.ToDisplay()</option>
+                    }
+                </select>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-accent">Покажи</button>
+                <a class="btn btn-outline-secondary" asp-action="Index">Изчисти филтрите</a>
+            </div>
+        </form>
+    </aside>
+
+    <section class="col-lg-9" aria-label="Резултати">
+        @if (result.Items.Count == 0)
+        {
+            <div class="text-center text-muted py-5">
+                <i class="bi bi-emoji-frown fs-1 d-block mb-2" aria-hidden="true"></i>
+                Няма животни, които отговарят на избраните филтри.
+            </div>
+        }
+        else
+        {
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-4">
+                @foreach (var animal in result.Items)
+                {
+                    <div class="col reveal">
+                        <partial name="_AnimalCard" model="animal" />
+                    </div>
+                }
+            </div>
+
+            @if (result.TotalPages > 1)
+            {
+                <nav class="mt-4" aria-label="Страници">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item @(result.HasPreviousPage ? "" : "disabled")">
+                            <a class="page-link" href="@PageUrl(result.Page - 1)">Предишна</a>
+                        </li>
+                        @for (int i = 1; i <= result.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == result.Page ? "active" : "")">
+                                <a class="page-link" href="@PageUrl(i)">@i</a>
+                            </li>
+                        }
+                        <li class="page-item @(result.HasNextPage ? "" : "disabled")">
+                            <a class="page-link" href="@PageUrl(result.Page + 1)">Следваща</a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+        }
+    </section>
+</div>
+
+@section Scripts {
+    <script src="~/js/catalog.js" asp-append-version="true"></script>
+}

@@ -64,6 +64,81 @@ body {
     font-weight: 700;
 }
 
+/* ---------- Каталог ---------- */
+.filter-panel {
+    background: #fff;
+    border: 1px solid var(--card-border);
+}
+
+@media (min-width: 992px) {
+    .filter-panel {
+        position: sticky;
+        top: 1rem;
+    }
+}
+
+.animal-card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.animal-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(43, 37, 34, 0.1);
+}
+
+.animal-card-image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--accent-soft);
+    overflow: hidden;
+}
+
+.animal-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.animal-card:hover .animal-card-image img {
+    transform: scale(1.05);
+}
+
+.animal-card-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 0.5;
+}
+
+.animal-card-status {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+}
+
+.chip {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    font-size: 0.8rem;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.pagination .page-link {
+    color: var(--accent-dark);
+}
+
 /* ---------- Анимация при превъртане (вж. site.js) ---------- */
 .reveal {
     opacity: 0;

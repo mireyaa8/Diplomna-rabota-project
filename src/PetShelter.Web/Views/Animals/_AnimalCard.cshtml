@@ -1,0 +1,36 @@
+@model AnimalCardModel
+
+<article class="animal-card h-100 rounded-4 overflow-hidden">
+    <a asp-controller="Animals" asp-action="Details" asp-route-id="@Model.Id" class="text-reset text-decoration-none">
+        <div class="animal-card-image">
+            @if (Model.MainImageUrl is not null)
+            {
+                <img src="@Model.MainImageUrl" alt="Снимка на @Model.Name" loading="lazy" />
+            }
+            else
+            {
+                <div class="animal-card-placeholder" aria-hidden="true">
+                    <i class="bi bi-heart"></i>
+                </div>
+            }
+            @if (Model.Status != AnimalStatus.Available)
+            {
+                <span class="badge text-bg-warning animal-card-status">@Model.Status.ToDisplay()</span>
+            }
+        </div>
+        <div class="p-3">
+            <h3 class="h5 fw-bold mb-1">@Model.Name</h3>
+            <div class="text-muted small mb-2">
+                @Model.SpeciesName@(Model.BreedName is null ? "" : $" · {Model.BreedName}")
+            </div>
+            <div class="d-flex flex-wrap gap-1 mb-2">
+                <span class="chip">@Model.Gender.ToDisplay()</span>
+                <span class="chip">@Model.Size.ToDisplay()</span>
+                <span class="chip">@DisplayNames.AgeText(Model.AgeInYears)</span>
+            </div>
+            <div class="small text-muted">
+                <i class="bi bi-geo-alt" aria-hidden="true"></i> @Model.ShelterName, @Model.City
+            </div>
+        </div>
+    </a>
+</article>
